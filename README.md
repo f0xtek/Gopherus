@@ -6,17 +6,18 @@ If you know a place which is SSRF vulnerable then, this tool will help you to ge
 
 ## About
 This tool can generate payload for following:
-1.  MySQL     (Port-3306)
-2.  PostgreSQL(Port-5432)
-3.  FastCGI   (Port-9000)
-4.  Memcached (Port-11211)  
+1.  HTTP      (Port-80 & Port-443)
+2.  MySQL     (Port-3306)
+3.  PostgreSQL(Port-5432)
+4.  FastCGI   (Port-9000)
+5.  Memcached (Port-11211)  
     - If stored data is getting De-serialized by: <br>
         - Python <br>
         - Ruby  <br>
         - PHP   <br>
-5.  Redis     (Port-6379)
-6.  Zabbix    (Port-10050)
-7.  SMTP      (Port-25)
+6.  Redis     (Port-6379)
+7.  Zabbix    (Port-10050)
+8.  SMTP      (Port-25)
 
 ## Installation
 
@@ -33,8 +34,10 @@ sudo ./install.sh
 |--------------------------|--------------------------------|
 |  gopherus --help         |          Help                  |
 |  gopherus --exploit      |    Arguments can be  :         |
+|                          |    --exploit http              |
+|                          |    --exploit https             |
 |                          |    --exploit mysql             |
-|			   |    --exploit postgresql	    |
+|			               |    --exploit postgresql	    |
 |                          |    --exploit fastcgi           |
 |                          |    --exploit redis             |
 |                          |    --exploit zabbix            |
@@ -45,6 +48,16 @@ sudo ./install.sh
 |                          |    --exploit smtp              |
 
 ## Examples
+
+* HTTP(S)
+
+```bash
+gopherus --exploit http
+# or
+gopherus --exploit https
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It asks for the target URL, HTTP method, HTTP body (optional), HTTP headers (optional) and it will provide you gopher link.
 
 * MySQL:  If the user is not protected with password you can dump his database and also you can put malicious files in his system.
 
@@ -111,6 +124,7 @@ gopherus --exploit smtp
 
 ## Screenshots
 
+![image](./images/http.png)
 ![image](./images/tool2.1.png)
 ![image](./images/tool2.0.png)
 ![image](./images/tool2.2.png)

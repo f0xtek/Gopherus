@@ -2,6 +2,7 @@
 import argparse
 from sys import exit
 from scripts import (
+    HTTP,
     FastCGI,
     MySQL,
     PostgreSQL,
@@ -17,7 +18,9 @@ from scripts import (
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--exploit",
-    help="mysql,\n"
+    help="http,\n"
+    "https,\n"
+    "mysql,\n"
     "postgresql,\n"
     "fastcgi,\n"
     "redis,\n"
@@ -39,44 +42,38 @@ class Colors:
     blue = "\033[34m"
 
 
-print(
-    Colors.green
-    + """
+if __name__ == '__main__':
+    print(f"""{Colors.green}
+    ________              .__
+    /  _____/  ____ ______ |  |__   ___________ __ __  ______
+    /   \  ___ /  _ \\____ \|  |  \_/ __ \_  __ \  |  \/  ___/
+    \    \_\  (  <_> )  |_> >   Y  \  ___/|  | \/  |  /\___ \\
+    \______  /\____/|   __/|___|  /\___  >__|  |____//____  >
+            \/       |__|        \/     \/                 \/
+{Colors.reset}
+\t\t{Colors.blue}author: {Colors.orange}$_SpyD3r_${Colors.reset}
+""")
 
-  ________              .__
- /  _____/  ____ ______ |  |__   ___________ __ __  ______
-/   \  ___ /  _ \\____ \|  |  \_/ __ \_  __ \  |  \/  ___/
-\    \_\  (  <_> )  |_> >   Y  \  ___/|  | \/  |  /\___ \
- \______  /\____/|   __/|___|  /\___  >__|  |____//____  >
-        \/       |__|        \/     \/                 \/
-"""
-    + "\n\t\t"
-    + Colors.blue
-    + "author: "
-    + Colors.orange
-    + "$_SpyD3r_$"
-    + "\n"
-    + Colors.reset
-)
+    if not args.exploit:
+        parser.print_help()
+        exit()
 
-if not args.exploit:
-    parser.print_help()
-    exit()
+    exploit_map = {
+        "http": HTTP.Http,
+        "https": HTTP.Http,
+        "mysql": MySQL.MySQL,
+        "postgresql": PostgreSQL.PostgreSQL,
+        "fastcgi": FastCGI.FastCGI,
+        "redis": Redis.Redis,
+        "smtp": SMTP.SMTP,
+        "zabbix": Zabbix.Zabbix,
+        "dmpmemcache": DumpMemcached.DumpMemcached,
+        "phpmemcache": PHPMemcached.PHPMemcached,
+        "rbmemcache": RbMemcached.RbMemcached,
+        "pymemcache": PyMemcached.PyMemcached,
+    }
 
-exploit_map = {
-    "mysql": MySQL.MySQL,
-    "postgresql": PostgreSQL.PostgreSQL,
-    "fastcgi": FastCGI.FastCGI,
-    "redis": Redis.Redis,
-    "smtp": SMTP.SMTP,
-    "zabbix": Zabbix.Zabbix,
-    "dmpmemcache": DumpMemcached.DumpMemcached,
-    "phpmemcache": PHPMemcached.PHPMemcached,
-    "rbmemcache": RbMemcached.RbMemcached,
-    "pymemcache": PyMemcached.PyMemcached,
-}
-
-if args.exploit in exploit_map:
-    exploit_map[args.exploit]()
-else:
-    parser.print_help()
+    if args.exploit in exploit_map:
+        exploit_map[args.exploit]()
+    else:
+        parser.print_help()
