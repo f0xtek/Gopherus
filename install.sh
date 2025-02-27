@@ -1,5 +1,7 @@
 #!/bin/bash
-python2 -m pip install argparse
-python2 -m pip install requests
+
+python3 -m venv .venv && source .venv/bin/activate || (echo "Unable to create virtual environent. Exiting."; exit 1)
+pip install requests
+
 chmod +x gopherus.py
-ln -sf $(pwd)/gopherus.py /usr/local/bin/gopherus
+ln -sf "${PWD}/gopherus.py" /usr/local/bin/gopherus
