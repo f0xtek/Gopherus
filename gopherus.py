@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import argparse
+from sys import exit
 from scripts import (
     FastCGI,
     MySQL,

@@ -1,4 +1,5 @@
 import urllib.parse
+from sys import exit
 
 
 def PHPMemcached():
