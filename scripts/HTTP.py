@@ -7,7 +7,7 @@ def build_http_request(url_parts, method, headers, body):
     return f"""{method} {url_parts.path or ''} HTTP/1.1
 Host: {url_parts.netloc}
 {'\r\n'.join(f"{key}: {val}" for key, val in headers.items())}
-{'\r\n'+body if body else None}"""
+{'\r\n'+body if body else ''}"""
 
 
 def encode_gopher_payload(domain, port, http_req):
